@@ -5,23 +5,14 @@ from pytube import YouTube
 import threading
 
 
-# ------------------------------
-# GUI Constants
-# ------------------------------
 WINDOW_CLASS = "YTDownloaderWin32"
 FONT = None
 
-
-# ------------------------------
-# Helper: Show message in output box
-# ------------------------------
+# Show message in output box
 def set_output(text):
     win32gui.SendMessage(output_box, win32con.WM_SETTEXT, 0, text)
 
-
-# ------------------------------
-# Download video (threaded)
-# ------------------------------
+# Download video (
 def download_video(url):
     try:
         yt = YouTube(url)
@@ -32,10 +23,7 @@ def download_video(url):
     except Exception as e:
         set_output(f"Error: {e}")
 
-
-# ------------------------------
 # Download audio (threaded)
-# ------------------------------
 def download_audio(url):
     try:
         yt = YouTube(url)
@@ -46,10 +34,8 @@ def download_audio(url):
     except Exception as e:
         set_output(f"Error: {e}")
 
+# qualities
 
-# ------------------------------
-# List qualities
-# ------------------------------
 def list_qualities(url):
     try:
         yt = YouTube(url)
@@ -57,11 +43,9 @@ def list_qualities(url):
         set_output("Available Qualities:\n" + qualities)
     except Exception as e:
         set_output(f"Error: {e}")
-
-
-# ------------------------------
+        
 # Win32 Window Procedure
-# ------------------------------
+
 def window_proc(hwnd, msg, wparam, lparam):
     if msg == win32con.WM_COMMAND:
         control_id = win32api.LOWORD(wparam)
@@ -83,10 +67,8 @@ def window_proc(hwnd, msg, wparam, lparam):
 
     return win32gui.DefWindowProc(hwnd, msg, wparam, lparam)
 
+# GUI
 
-# ------------------------------
-# Create GUI
-# ------------------------------
 wc = win32gui.WNDCLASS()
 wc.lpfnWndProc = window_proc
 wc.lpszClassName = WINDOW_CLASS
@@ -100,7 +82,6 @@ hwnd = win32gui.CreateWindow(
     0, 0, 0, None
 )
 
-# Input box
 url_box = win32gui.CreateWindow(
     "EDIT", "",
     win32con.WS_CHILD | win32con.WS_VISIBLE | win32con.WS_BORDER,
@@ -130,7 +111,6 @@ btn_audio = win32gui.CreateWindow(
     hwnd, 3, 0, None
 )
 
-# Output box
 output_box = win32gui.CreateWindow(
     "EDIT", "",
     win32con.WS_CHILD | win32con.WS_VISIBLE | win32con.ES_MULTILINE |
@@ -139,9 +119,7 @@ output_box = win32gui.CreateWindow(
     hwnd, 4, 0, None
 )
 
-# Show window
 win32gui.ShowWindow(hwnd, win32con.SW_SHOW)
 win32gui.UpdateWindow(hwnd)
 
-# Start message loop
 win32gui.PumpMessages()
