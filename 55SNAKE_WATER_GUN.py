@@ -40,7 +40,7 @@
     
 # s_w_g()
 
-# CORRECT ANSWER
+# finally got the CORRECT ANSWER
 
 
 import numpy as np
