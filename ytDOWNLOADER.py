@@ -8,11 +8,9 @@ import threading
 WINDOW_CLASS = "YTDownloaderWin32"
 FONT = None
 
-# Show message in output box
 def set_output(text):
     win32gui.SendMessage(output_box, win32con.WM_SETTEXT, 0, text)
 
-# Download video (
 def download_video(url):
     try:
         yt = YouTube(url)
@@ -23,7 +21,6 @@ def download_video(url):
     except Exception as e:
         set_output(f"Error: {e}")
 
-# Download audio (threaded)
 def download_audio(url):
     try:
         yt = YouTube(url)
@@ -34,8 +31,6 @@ def download_audio(url):
     except Exception as e:
         set_output(f"Error: {e}")
 
-# qualities
-
 def list_qualities(url):
     try:
         yt = YouTube(url)
@@ -44,8 +39,6 @@ def list_qualities(url):
     except Exception as e:
         set_output(f"Error: {e}")
         
-# Win32 Window Procedure
-
 def window_proc(hwnd, msg, wparam, lparam):
     if msg == win32con.WM_COMMAND:
         control_id = win32api.LOWORD(wparam)
@@ -67,7 +60,6 @@ def window_proc(hwnd, msg, wparam, lparam):
 
     return win32gui.DefWindowProc(hwnd, msg, wparam, lparam)
 
-# GUI
 
 wc = win32gui.WNDCLASS()
 wc.lpfnWndProc = window_proc
@@ -89,7 +81,6 @@ url_box = win32gui.CreateWindow(
     hwnd, 1000, 0, None
 )
 
-# Buttons
 btn_list = win32gui.CreateWindow(
     "BUTTON", "List Qualities",
     win32con.WS_CHILD | win32con.WS_VISIBLE,
