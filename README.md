@@ -1,2 +1,2 @@
 # MY-PYTHON-PROGRAMS
-these are my python programs which i built myself &amp; some internet help
+I’m excited to share a collection of Python programs I’ve developed, leveraging both independent problem-solving and collaborative insights from the global developer community. 🚀🐍
